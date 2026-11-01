@@ -7,7 +7,7 @@
 
   A playable music-genre challenge, powered by original browser-synthesised sound. Listen, identify the genre, build your streak, and climb your own leaderboard.
 
-  **[Get started](#quick-start)** · **[Gameplay](#how-to-play)** · **[Architecture](docs/ARCHITECTURE.md)** · **[Tests](#quality-assurance)**
+  **[Play Melody Masters online](https://leahweldon.github.io/Melody-Masters/)** · **[Get started locally](#quick-start)** · **[Gameplay](#how-to-play)** · **[Architecture](docs/ARCHITECTURE.md)** · **[Tests](#quality-assurance)**
 </div>
 
 ![Melody Masters landing screen, with pink vinyl-inspired artwork and a dark interface](assets/screenshots/home-desktop.png)
