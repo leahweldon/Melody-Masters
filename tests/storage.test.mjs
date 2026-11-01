@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {rankEntries,readScores,addScore,clearScores} from '../src/storage.js';
+const makeStorage=()=>{const db=new Map();return {getItem:key=>db.get(key)||null,setItem:(key,val)=>db.set(key,val),removeItem:key=>db.delete(key)}};
+const entry=(name,score,correct=4,date='2026-01-01')=>({name,score,correct,date,difficulty:'warmup'});
+test('an empty leaderboard is valid',()=>assert.deepEqual(readScores(makeStorage()),[]));
+test('score round trips through local storage',()=>{const s=makeStorage();assert.equal(addScore(entry('DJ A',100),s),true);assert.equal(readScores(s)[0].name,'DJ A');});
+test('leaderboard sorts descending and retains at most ten entries',()=>{const s=makeStorage();for(let i=0;i<15;i++)addScore(entry(`Player ${i}`,i*100),s);const r=readScores(s);assert.equal(r.length,10);assert.equal(r[0].score,1400);assert.equal(r.at(-1).score,500);});
+test('ties break by correct answers then earlier date',()=>{const r=rankEntries([entry('B',100,2),entry('A',100,4),entry('C',100,4,'2027-01-01')]);assert.deepEqual(r.map(x=>x.name),['A','C','B']);});
+test('corrupt, malformed or unavailable storage returns empty',()=>{assert.deepEqual(readScores({getItem:()=>'{bad'}),[]);assert.deepEqual(readScores({getItem:()=>{throw Error('blocked')}}),[]);assert.deepEqual(readScores({getItem:()=>'{"a":2}'}),[]);});
+test('data validation excludes malformed results',()=>{const s={getItem:()=>JSON.stringify([entry('Valid',100),{name:'bad',score:-2,correct:2,date:'x'},{}])};assert.equal(readScores(s).length,1);});
+test('storage write failures are reported, not thrown',()=>{const s={getItem:()=>null,setItem:()=>{throw Error('blocked')}};assert.equal(addScore(entry('Test',10),s),false);});
+test('clear removes scores',()=>{const s=makeStorage();addScore(entry('One',100),s);assert.equal(clearScores(s),true);assert.deepEqual(readScores(s),[]);});

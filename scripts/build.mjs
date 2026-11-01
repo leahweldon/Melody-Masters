@@ -1,0 +1,10 @@
+import { cp, mkdir, rm, copyFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+const root = resolve(import.meta.dirname, '..');
+const dest = resolve(root, 'dist');
+await rm(dest, { recursive: true, force: true });
+await mkdir(resolve(dest, 'assets'), { recursive: true });
+await copyFile(resolve(root, 'index.html'), resolve(dest, 'index.html'));
+await cp(resolve(root, 'src'), resolve(dest, 'src'), { recursive: true });
+await copyFile(resolve(root, 'assets/favicon.svg'), resolve(dest, 'assets/favicon.svg'));
+console.log('PASS: produced a static, deployable Melody Masters site in dist/.');

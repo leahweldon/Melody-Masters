@@ -1,0 +1,20 @@
+const paths={
+  arrow:'<path d="M5 12h14m-6-6 6 6-6 6"/>',
+  play:'<path d="m8 5 11 7-11 7V5Z"/>',
+  replay:'<path d="M3 11a9 9 0 1 1 3 7M3 4v7h7"/>',
+  trophy:'<path d="M8 21h8m-4-4v4M7 4h10v8a5 5 0 0 1-10 0V4ZM7 6H4v4a3 3 0 0 0 3 3m10-7h3v4a3 3 0 0 1-3 3"/>',
+  sound:'<path d="M11 5 6 9H3v6h3l5 4V5ZM15 9a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/>',
+  muted:'<path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/>',
+  check:'<path d="m4 12 5 5L20 6"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  home:'<path d="m3 10 9-7 9 7v10H3V10Zm6 10v-7h6v7"/>',
+  headphones:'<path d="M3 14v-3a9 9 0 0 1 18 0v3M6 14H3v5h4v-5H6Zm12 0h3v5h-4v-5h1Z"/>',
+  sparkles:'<path d="m12 3 1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5L12 3Zm7 13 .7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7L19 16ZM4 2l.6 2.4L7 5l-2.4.6L4 8l-.6-2.4L1 5l2.4-.6L4 2Z"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  skip:'<path d="m5 5 10 7-10 7V5Zm12 0v14"/>',
+  pause:'<path d="M8 5v14m8-14v14"/>',
+  record:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>',
+  chevron:'<path d="m9 18 6-6-6-6"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/>',
+};
+export function icon(name,size=20){return `<svg aria-hidden="true" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${paths[name]||paths.record}</svg>`}
